@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { ContainerRotas } from "../app/components/ContainerRotas";
 import { colorsX } from "../styles/Cores";
 import { FlexColumn } from "../styles/Flex";
+import { ContainerFlexColumn, ContainerFlexRow, ContainerP12, ContainerP12300, ContainerP32, ContainerP14 } from "../styles/ContainerRotas";
 
 export default function QuemSomos() {
   const Div: any = styled(FlexColumn)`
@@ -32,7 +32,15 @@ export default function QuemSomos() {
 
   return (
     <>
-      <ContainerRotas />
+      <ContainerFlexColumn>
+        <ContainerFlexRow>
+          <ContainerP12>Home</ContainerP12>
+          <ContainerP12300>{">"}</ContainerP12300>
+          <ContainerP12>Quem Somos</ContainerP12>
+        </ContainerFlexRow>
+        <ContainerP32>Quem Somos</ContainerP32>
+        <ContainerP14>A maior rede de tratamento pokémon.</ContainerP14>
+      </ContainerFlexColumn>
       <Div>
         <StyledFlexColumn>
           <P18>O Centro Pokémon</P18>
