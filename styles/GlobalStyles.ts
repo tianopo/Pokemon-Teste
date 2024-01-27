@@ -1,11 +1,11 @@
 import { createGlobalStyle } from 'styled-components';
-import { colorsX } from './Cores';
+import { inter } from "../app/font";
 
 const GlobalStyles: any = createGlobalStyle`
   body {
     margin: 0;
     padding: 0;
-    font-family: 'Inter', sans-serif;
+    font-family: ${inter}
   }
 
   header {
@@ -14,6 +14,7 @@ const GlobalStyles: any = createGlobalStyle`
     height: 104px;
     justify-content: space-around;
     align-items: center;
+    flex-shrink: 0;
   }
 `;
 
