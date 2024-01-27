@@ -1,0 +1,25 @@
+{
+  "material-icon-theme.activeIconPack": "react",
+  "files.exclude": {
+    "**/.git": true,
+    "next.config.js": true, 
+    ".eslintrc.json": true,
+  },
+  "typescript.preferences.quoteStyle": "double",
+  "editor.minimap.enabled": true,
+  "editor.wordWrap": "on",
+  "editor.renderWhitespace": "boundary",
+  "editor.cursorSmoothCaretAnimation": "on",
+  "editor.suggest.snippetsPreventQuickSuggestions": false,
+  "editor.insertSpaces": true,
+  "editor.tabSize": 2,
+  "editor.formatOnSave": true,
+  "editor.formatOnType": true,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "explicit",
+    "source.fixAll.eslint": "explicit",
+    "source.fixAll.tslint": "explicit",
+    "source.fixAll.stylelint": "explicit",
+    "source.addMissingImports": "explicit"
+  },
+}
