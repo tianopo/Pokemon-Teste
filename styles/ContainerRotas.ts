@@ -20,18 +20,22 @@ export const ContainerP12: any = styled.p`
     font-size: 12px;
     font-weight: 700;
     margin: 0;
+    cursor: pointer;
   `
 
 export const ContainerP12300: any = styled(ContainerP12)`
     font-weight: 300;
+    cursor: auto;
   `
 
 export const ContainerP32: any = styled(ContainerP12)`
     font-size: 32px;
+    cursor: auto;
   `
 
 export const ContainerP14: any = styled(ContainerP12)`
     font-size: 14px;
     font-weight: 400;
     margin: 0;
+    cursor: auto;
   `

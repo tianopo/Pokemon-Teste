@@ -1,18 +1,17 @@
 import styled from "styled-components";
+import { ContainerFlexColumn, ContainerFlexRow, ContainerP12, ContainerP12300, ContainerP14, ContainerP32 } from "../styles/ContainerRotas";
 import { colorsX } from "../styles/Cores";
 import { FlexColumn } from "../styles/Flex";
-import { ContainerFlexColumn, ContainerFlexRow, ContainerP12, ContainerP12300, ContainerP32, ContainerP14 } from "../styles/ContainerRotas";
 
-export default function QuemSomos() {
-  const Div: any = styled(FlexColumn)`
+const Div: any = styled(FlexColumn)`
     align-items: center;
     padding: 34px 0 56px;
   `
 
-  const StyledFlexColumn: any = styled.div`
+const StyledFlexColumn: any = styled.div`
     width: 408px;
   `
-  const P18: any = styled.p`
+const P18: any = styled.p`
     color: ${colorsX.write};
     font-size: 18px;
     font-weight: 600;
@@ -20,15 +19,17 @@ export default function QuemSomos() {
     margin-top: 0;
   `
 
-  const P16: any = styled(P18)`
+const P16: any = styled(P18)`
     font-size: 16px; 
     font-weight: 500;
     margin-top: 16px;
   `
 
-  const P14: any = styled(P16)`
+const P14: any = styled(P16)`
     font-size: 14px; 
   `
+
+export default function QuemSomos() {
 
   return (
     <>

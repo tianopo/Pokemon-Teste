@@ -1,18 +1,17 @@
 import styled from 'styled-components';
 
-export default function Home() {
-  const HeroSection: any = styled.div`
+const HeroSection: any = styled.div`
   position: relative;
   overflow: hidden;
 `;
 
-  const HeroImage: any = styled.img`
+const HeroImage: any = styled.img`
   width: 100%;
   height: 720px;
   display: block;
 `;
 
-  const HeroText: any = styled.p`
+const HeroText: any = styled.p`
   position: absolute;
   top: 50%;
   left: 50%;
@@ -22,6 +21,8 @@ export default function Home() {
   text-align: center;
   color: white;
 `;
+
+export default function Home() {
 
   return (
     <HeroSection>
