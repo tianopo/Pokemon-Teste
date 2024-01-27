@@ -4,10 +4,9 @@ import { ButtonNewPokemon, ButtonPaga, Div, Divider, FlexCol, FlexR, FlexRowPaga
 
 export default function Consulta() {
   const [quantidadePokemons, setQuantidadePokemons] = useState(1);
-  const [atendimento, setAtendimento] = useState(0)
-  const [subtotal, setSubtotal] = useState(0)
-  const [taxa, setTaxa] = useState(0)
-  const [total, setTotal] = useState(0)
+  const subtotal = 70.00 * quantidadePokemons;
+  const taxa = subtotal * (3 / 100);
+  const total = subtotal + taxa
 
   const adicionarPokemon = () => {
     if (quantidadePokemons < 6) {
@@ -117,11 +116,11 @@ export default function Consulta() {
               </FlexRowPaga>
               <FlexRowPaga>
                 <P14Terciary>Subtotal:</P14Terciary>
-                <P14Terciary>R$ 70,00</P14Terciary>
+                <P14Terciary>R$ {subtotal}</P14Terciary>
               </FlexRowPaga>
               <FlexRowPaga>
                 <P14Terciary>Taxa geracional*:</P14Terciary>
-                <P14Terciary>R$ 2,10</P14Terciary>
+                <P14Terciary>R$ {taxa}</P14Terciary>
               </FlexRowPaga>
               <P8>
                 *adicionamos uma taxa de 3%, multiplicado pelo número da geração mais alta do time, com limite de até 30%
