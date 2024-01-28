@@ -10,7 +10,7 @@ export interface ICriarAgendamentoSchema {
   dataAtendimento: string;
   horarioAtendimento: string;
   timePokemons: { pokemon: string }[];
-  total: number;
+  total?: number;
 }
 
 export const useCriarAgendamento = () => {
@@ -28,7 +28,7 @@ export const useCriarAgendamento = () => {
       .label('pokemon'),
     dataAtendimento: Yup.string().required().label('dataAtendimento'),
     horarioAtendimento: Yup.string().required().label('horarioAtendimento'),
-    total: Yup.number().required().label('total')
+    total: Yup.number().optional().label('total')
   });
 
   const contexto = useForm<ICriarAgendamentoSchema>({

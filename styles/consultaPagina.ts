@@ -143,3 +143,34 @@ export const MensagemDeErro: any = styled.span`
     font-size: 12px;
     color: red;
 `
+
+export const SuccesfullyCard: any = styled(FlexColumn)`
+  width: 368px;
+  height: 185px;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  border: 1px solid ${colorsX.borda_secundaria};
+  padding: 19px;
+  border-radius: 8px;
+  background: ${colorsX.fundo_secundario}
+`
+
+export const P20: any = styled.p`
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0;
+`
+
+export const ImageIcon: any = styled.img`
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+`
+
+export const P14TerciaryAlign: any = styled(P14Terciary)`
+  text-align: center;
+`
+export const ButtonAgendamento: any = styled(ButtonPaga)`
+    width: 197px;
+`

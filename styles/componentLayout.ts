@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import { colorsX } from "./Cores"
-import { FlexRow } from "./Flex"
+import { FlexColumn, FlexRow } from "./Flex"
 
 export const StyledFooter: any = styled.footer`
     display: flex;
@@ -67,3 +67,4 @@ export const StyledWriteNav: any = styled.p`
     line-height: normal;
     cursor: pointer;
   `
+  
