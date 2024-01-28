@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { useEffect, useState } from "react";
+import { CitySelect } from "../../app/components/Select/CidadeSelect";
 import { PokemonSelect } from "../../app/components/Select/PokemonSelect";
+import { RegionSelect } from "../../app/components/Select/RegiaoSelect";
 import { ContainerFlexColumn, ContainerFlexRow, ContainerP12, ContainerP12300, ContainerP14, ContainerP32 } from "../../styles/ContainerRotas";
 import { ButtonNewPokemon, ButtonPaga, Div, Divider, FlexCol, FlexR, FlexRowPaga, FlexTime, Form, Input, Label, Option, P12Black, P12Cinza, P14Terciary, P16Mais, P24, P8, Select } from "../../styles/consultaPagina";
 import { DateResponse } from "../api/scheduling/date";
@@ -74,19 +76,11 @@ export default function Consulta() {
           <FlexR>
             <FlexCol>
               <Label htmlFor="regiao">Região</Label>
-              <Select id="regiao" name="regiao">
-                <Option value="Kanto">Kanto</Option>
-                <Option value="Johto">Johto</Option>
-                <Option value="Sinnoh">Sinnoh</Option>
-              </Select>
+              <RegionSelect />
             </FlexCol>
             <FlexCol>
               <Label htmlFor="cidade">Cidade</Label>
-              <Select id="cidade" name="cidade">
-                <Option value="Pewter City">Pewter City</Option>
-                <Option value="Pallet Town">Pallet Town</Option>
-                <Option value="Veridian City">Veridian City</Option>
-              </Select>
+              <CitySelect />
             </FlexCol>
           </FlexR>
           <FlexTime>
@@ -94,9 +88,9 @@ export default function Consulta() {
               <P12Black>Cadastre seu time</P12Black>
               <P12Cinza>Atendemos até 06 pokémons por vez</P12Cinza>
             </FlexCol>
-              {[...Array(quantidadePokemons)].map((_, index) => (
-                <PokemonSelect key={`pokemon${index + 1}`} pokemonId={(index + 1).toString()} />
-              ))}
+            {[...Array(quantidadePokemons)].map((_, index) => (
+              <PokemonSelect key={`pokemon${index + 1}`} pokemonId={(index + 1).toString()} />
+            ))}
             <ButtonNewPokemon type="button" onClick={adicionarPokemon}>
               <P12Black>
                 {

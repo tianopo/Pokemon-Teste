@@ -20,7 +20,7 @@ export const PokemonSelect = ({ pokemonId }: IPokemonSelect): any => {
         const pokemonDataList: IPokemonData[] = response.data.results.map((pokemon: any) => ({
           name: pokemon.name,
         }));
-        console.log(response.data.results[0].url)
+
         setPokemonList(pokemonDataList);
       } catch (error) {
         console.error('Erro ao buscar lista de Pokémon:', error);
