@@ -16,7 +16,7 @@ export const RegionSelect = (): any => {
         const regionDataList: IRegionData[] = response.data.results.map((region: any) => ({
           name: region.name,
         }));
-        
+
         setRegionList(regionDataList);
       } catch (error) {
         console.error('Erro ao buscar lista de Pokémon:', error);
@@ -28,8 +28,8 @@ export const RegionSelect = (): any => {
 
   return (
     <Select id={`regiao`} name={`regiao`}>
-      {regionList.map((region) => (
-        <Option key={region.name} value={region.name}>{`${region.name}`}</Option>
+      {regionList.map((region, index) => (
+        <Option key={index} value={region.name}>{`${region.name}`}</Option>
       ))}
     </Select>
   );

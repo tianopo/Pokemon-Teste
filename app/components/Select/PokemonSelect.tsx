@@ -32,8 +32,8 @@ export const PokemonSelect = ({ pokemonId }: IPokemonSelect): any => {
 
   return (
     <Select id={`pokemon${pokemonId}`} name={`pokemon${pokemonId}`}>
-      {pokemonList.map((pokemon) => (
-        <Option key={pokemon.name} value={pokemon.name}>{`${pokemon.name}`}</Option>
+      {pokemonList.map((pokemon, index) => (
+        <Option key={index} value={pokemon.name}>{`${pokemon.name}`}</Option>
       ))}
     </Select>
   );

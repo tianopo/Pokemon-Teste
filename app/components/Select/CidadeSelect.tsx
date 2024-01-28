@@ -28,8 +28,8 @@ export const CitySelect = (): any => {
 
   return (
     <Select id={`city`} name={`city`}>
-      {cityList.map((city) => (
-        <Option key={city.name} value={city.name}>{`${city.name}`}</Option>
+      {cityList.map((city, index) => (
+        <Option key={index} value={city.name}>{`${city.name}`}</Option>
       ))}
     </Select>
   );
