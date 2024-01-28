@@ -113,10 +113,10 @@ export default function Consulta() {
                     <P12Cinza>Atendemos até 06 pokémons por vez</P12Cinza>
                   </FlexCol>
                   {[...Array(quantidadePokemons)].map((_, index) => (
-                    <>
-                      <PokemonSelect key={`${index + 1}`} register={register} index={index} />
-                      <MensagemDeErro>{errors.timePokemons?.message}</MensagemDeErro>
-                    </>
+                    <div key={index}>
+                      <PokemonSelect register={register} index={index} />
+                      <MensagemDeErro>{errors.timePokemons?.[index]?.pokemon?.message}</MensagemDeErro>
+                    </div>
                   ))}
                   <ButtonNewPokemon type="button" onClick={adicionarPokemon}>
                     <P12Black>
@@ -132,6 +132,7 @@ export default function Consulta() {
                     <FlexCol>
                       <Label htmlFor="dataAtendimento">Data para Atendimento</Label>
                       <Select id="dataAtendimento" {...register("dataAtendimento")}>
+                        <Option value="">Selecione um horário</Option>
                         {dates.map((date, index) => (
                           <Option key={index} value={date}>
                             {date}
@@ -143,6 +144,7 @@ export default function Consulta() {
                     <FlexCol>
                       <Label htmlFor="horarioAtendimento">Horário de Atendimento</Label>
                       <Select id="horarioAtendimento" {...register("horarioAtendimento")}>
+                        <Option value="">Selecione uma data</Option>
                         {horarios.map((horario, index) => (
                           <Option key={index} value={horario}>
                             {horario}

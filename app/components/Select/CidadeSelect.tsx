@@ -33,6 +33,7 @@ export const CitySelect = ({ register }: ICitySelect): any => {
 
   return (
     <Select id={`cidade`} {...register('cidade')}>
+      <Option value="">Selecione sua cidade</Option>
       {cityList.map((city, index) => (
         <Option key={index} value={city.name}>{`${city.name}`}</Option>
       ))}

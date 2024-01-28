@@ -15,10 +15,10 @@ export interface ICriarAgendamentoSchema {
 
 export const useCriarAgendamento = () => {
   const consultaSchema = Yup.object().shape({
-    nome: Yup.string().required().label('nome'),
-    sobrenome: Yup.string().required().label('sobrenome'),
-    regiao: Yup.string().required().label('regiao'),
-    cidade: Yup.string().required().label('cidade'),
+    nome: Yup.string().required().label('Nome'),
+    sobrenome: Yup.string().required().label('Sobrenome'),
+    regiao: Yup.string().required().label('Regiao'),
+    cidade: Yup.string().required().label('Cidade'),
     timePokemons: Yup.array()
       .of(Yup.object().shape({
         pokemon: Yup.string().required(),
@@ -26,9 +26,9 @@ export const useCriarAgendamento = () => {
       .required('É necessário ter pelo menos 1 pokémon no time')
       .max(6, 'O time não pode ter mais do que 6 pokémons')
       .label('pokemon'),
-    dataAtendimento: Yup.string().required().label('dataAtendimento'),
-    horarioAtendimento: Yup.string().required().label('horarioAtendimento'),
-    total: Yup.number().optional().label('total')
+    dataAtendimento: Yup.string().required().label('Data de Atendimento'),
+    horarioAtendimento: Yup.string().required().label('Horario de Atendimento'),
+    total: Yup.number().optional().label('Total')
   });
 
   const contexto = useForm<ICriarAgendamentoSchema>({

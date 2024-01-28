@@ -33,6 +33,7 @@ export const RegionSelect = ({ register }: IRegionSelect): any => {
 
   return (
     <Select id={`regiao`} {...register('regiao')}>
+      <Option value="">Selecione sua região</Option>
       {regionList.map((region, index) => (
         <Option key={index} value={region.name}>{`${region.name}`}</Option>
       ))}

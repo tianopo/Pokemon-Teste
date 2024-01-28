@@ -33,7 +33,8 @@ export const PokemonSelect = ({ register, index }: IPokemonSelect): any => {
   }, []);
 
   return (
-    <Select id={`pokemon-${index}`} {...register(`timePokemons[${index}].pokemon`)}>
+    <Select id={`pokemon`} {...register(`timePokemons[${index}].pokemon`)}>
+      <Option value="">Selecione seu pokémon</Option>
       {pokemonList.map((pokemon, index) => (
         <Option key={index} value={pokemon.name}>{`${pokemon.name}`}</Option>
       ))}
