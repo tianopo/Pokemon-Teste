@@ -1,12 +1,14 @@
 import axios from 'axios';
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { FormProvider } from "react-hook-form";
 import { CitySelect } from "../../app/components/Select/CidadeSelect";
 import { PokemonSelect } from "../../app/components/Select/PokemonSelect";
 import { RegionSelect } from "../../app/components/Select/RegiaoSelect";
+import { useCriarAgendamento } from "../../app/hooks/useCriarAgendamento";
 import { ContainerFlexColumn, ContainerFlexRow, ContainerP12, ContainerP12300, ContainerP14, ContainerP32 } from "../../styles/ContainerRotas";
 import { ButtonNewPokemon, ButtonPaga, Div, Divider, FlexCol, FlexR, FlexRowPaga, FlexTime, Form, Input, Label, Option, P12Black, P12Cinza, P14Terciary, P16Mais, P24, P8, Select } from "../../styles/consultaPagina";
 import { DateResponse } from "../api/scheduling/date";
-import { useRouter } from "next/router";
 
 export default function Consulta() {
   const router = useRouter();
@@ -16,6 +18,8 @@ export default function Consulta() {
   const total = subtotal + taxa
   const [dates, setDates] = useState<string[]>([]);
   const [horarios, setHorarios] = useState<string[]>([]);
+  const { contexto } = useCriarAgendamento();
+  const { formState: { errors }, register, watch, reset, } = contexto;
 
   const adicionarPokemon = () => {
     if (quantidadePokemons < 6) {
@@ -64,101 +68,103 @@ export default function Consulta() {
       </ContainerFlexColumn>
       <Div>
         <P24>Preencha o formulário abaixo para agendar sua consulta</P24>
-        <Form>
-          <FlexR>
-            <FlexCol>
-              <Label htmlFor="nome">Nome</Label>
-              <Input placeholder="Digite seu nome" id="nome" name="nome" />
-            </FlexCol>
-            <FlexCol>
-              <Label htmlFor="sobrenome">Sobrenome</Label>
-              <Input placeholder="Digite seu sobrenome" id="sobrenome" name="sobrenome" />
-            </FlexCol>
-          </FlexR>
-          <FlexR>
-            <FlexCol>
-              <Label htmlFor="regiao">Região</Label>
-              <RegionSelect />
-            </FlexCol>
-            <FlexCol>
-              <Label htmlFor="cidade">Cidade</Label>
-              <CitySelect />
-            </FlexCol>
-          </FlexR>
-          <FlexTime>
-            <FlexCol>
-              <P12Black>Cadastre seu time</P12Black>
-              <P12Cinza>Atendemos até 06 pokémons por vez</P12Cinza>
-            </FlexCol>
-            {[...Array(quantidadePokemons)].map((_, index) => (
-              <PokemonSelect key={`pokemon${index + 1}`} pokemonId={(index + 1).toString()} />
-            ))}
-            <ButtonNewPokemon type="button" onClick={adicionarPokemon}>
-              <P12Black>
-                {
-                  quantidadePokemons === 6
-                    ? "Retornar à Pokémon 01"
-                    : "Adicionar novo pokémon ao time ..."
-                }
-              </P12Black>
-              <P16Mais>{quantidadePokemons === 6 ? "" : "+"}</P16Mais>
-            </ButtonNewPokemon>
+        <FormProvider {...contexto}>
+          <Form>
             <FlexR>
               <FlexCol>
-                <Label htmlFor="dataAtendimento">Data para Atendimento</Label>
-                <Select id="dataAtendimento" name="dataAtendimento">
-                  {dates.map((date, index) => (
-                    <Option key={index} value={date}>
-                      {date}
-                    </Option>
-                  ))}
-                </Select>
+                <Label htmlFor="nome">Nome</Label>
+                <Input placeholder="Digite seu nome" id="nome" name="nome" />
               </FlexCol>
               <FlexCol>
-                <Label htmlFor="horarioAtendimento">Horário de Atendimento</Label>
-                <Select id="horarioAtendimento" name="horarioAtendimento">
-                  {horarios.map((horario, index) => (
-                    <Option key={index} value={horario}>
-                      {horario}
-                    </Option>
-                  ))}
-                </Select>
+                <Label htmlFor="sobrenome">Sobrenome</Label>
+                <Input placeholder="Digite seu sobrenome" id="sobrenome" name="sobrenome" />
               </FlexCol>
             </FlexR>
-            <Divider />
-            <FlexCol>
+            <FlexR>
+              <FlexCol>
+                <Label htmlFor="regiao">Região</Label>
+                <RegionSelect />
+              </FlexCol>
+              <FlexCol>
+                <Label htmlFor="cidade">Cidade</Label>
+                <CitySelect />
+              </FlexCol>
+            </FlexR>
+            <FlexTime>
+              <FlexCol>
+                <P12Black>Cadastre seu time</P12Black>
+                <P12Cinza>Atendemos até 06 pokémons por vez</P12Cinza>
+              </FlexCol>
+              {[...Array(quantidadePokemons)].map((_, index) => (
+                <PokemonSelect key={`pokemon${index + 1}`} pokemonId={(index + 1).toString()} />
+              ))}
+              <ButtonNewPokemon type="button" onClick={adicionarPokemon}>
+                <P12Black>
+                  {
+                    quantidadePokemons === 6
+                      ? "Retornar à Pokémon 01"
+                      : "Adicionar novo pokémon ao time ..."
+                  }
+                </P12Black>
+                <P16Mais>{quantidadePokemons === 6 ? "" : "+"}</P16Mais>
+              </ButtonNewPokemon>
+              <FlexR>
+                <FlexCol>
+                  <Label htmlFor="dataAtendimento">Data para Atendimento</Label>
+                  <Select id="dataAtendimento" name="dataAtendimento">
+                    {dates.map((date, index) => (
+                      <Option key={index} value={date}>
+                        {date}
+                      </Option>
+                    ))}
+                  </Select>
+                </FlexCol>
+                <FlexCol>
+                  <Label htmlFor="horarioAtendimento">Horário de Atendimento</Label>
+                  <Select id="horarioAtendimento" name="horarioAtendimento">
+                    {horarios.map((horario, index) => (
+                      <Option key={index} value={horario}>
+                        {horario}
+                      </Option>
+                    ))}
+                  </Select>
+                </FlexCol>
+              </FlexR>
+              <Divider />
+              <FlexCol>
+                <FlexRowPaga>
+                  <P14Terciary>Número de pokémons a serem atendidos:</P14Terciary>
+                  <P14Terciary>{quantidadePokemons}</P14Terciary>
+                </FlexRowPaga>
+                <FlexRowPaga>
+                  <P14Terciary>Atendimento Unitário por pokémon:</P14Terciary>
+                  <P14Terciary>R$ 70,00</P14Terciary>
+                </FlexRowPaga>
+                <FlexRowPaga>
+                  <P14Terciary>Subtotal:</P14Terciary>
+                  <P14Terciary>
+                    R$ {subtotal.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
+                  </P14Terciary>
+                </FlexRowPaga>
+                <FlexRowPaga>
+                  <P14Terciary>Taxa geracional*:</P14Terciary>
+                  <P14Terciary>
+                    R$ {taxa.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
+                  </P14Terciary>
+                </FlexRowPaga>
+                <P8>
+                  *adicionamos uma taxa de 3%, multiplicado pelo número da geração mais alta do time, com limite de até 30%
+                </P8>
+              </FlexCol>
               <FlexRowPaga>
-                <P14Terciary>Número de pokémons a serem atendidos:</P14Terciary>
-                <P14Terciary>{quantidadePokemons}</P14Terciary>
+                <P24>
+                  Valor Total: R$ {total.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
+                </P24>
+                <ButtonPaga>Concluir Agendamento</ButtonPaga>
               </FlexRowPaga>
-              <FlexRowPaga>
-                <P14Terciary>Atendimento Unitário por pokémon:</P14Terciary>
-                <P14Terciary>R$ 70,00</P14Terciary>
-              </FlexRowPaga>
-              <FlexRowPaga>
-                <P14Terciary>Subtotal:</P14Terciary>
-                <P14Terciary>
-                  R$ {subtotal.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
-                </P14Terciary>
-              </FlexRowPaga>
-              <FlexRowPaga>
-                <P14Terciary>Taxa geracional*:</P14Terciary>
-                <P14Terciary>
-                  R$ {taxa.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
-                </P14Terciary>
-              </FlexRowPaga>
-              <P8>
-                *adicionamos uma taxa de 3%, multiplicado pelo número da geração mais alta do time, com limite de até 30%
-              </P8>
-            </FlexCol>
-            <FlexRowPaga>
-              <P24>
-                Valor Total: R$ {total.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
-              </P24>
-              <ButtonPaga>Concluir Agendamento</ButtonPaga>
-            </FlexRowPaga>
-          </FlexTime>
-        </Form>
+            </FlexTime>
+          </Form>
+        </FormProvider>
       </Div>
     </>
   );
