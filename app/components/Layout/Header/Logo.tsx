@@ -12,8 +12,10 @@ export const Logo = (): any => {
       const timer = setTimeout(() => setIsHomePage(false), 5000);
 
       return () => clearTimeout(timer);
+    } else {
+      setIsHomePage(true)
     }
-  }, []);
+  }, [router]);
 
   return (
     <StyledLogo
