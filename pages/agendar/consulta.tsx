@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from "react";
+import { PokemonSelect } from "../../app/components/Select/PokemonSelect";
 import { ContainerFlexColumn, ContainerFlexRow, ContainerP12, ContainerP12300, ContainerP14, ContainerP32 } from "../../styles/ContainerRotas";
 import { ButtonNewPokemon, ButtonPaga, Div, Divider, FlexCol, FlexR, FlexRowPaga, FlexTime, Form, Input, Label, Option, P12Black, P12Cinza, P14Terciary, P16Mais, P24, P8, Select } from "../../styles/consultaPagina";
 import { DateResponse } from "../api/scheduling/date";
@@ -93,19 +94,9 @@ export default function Consulta() {
               <P12Black>Cadastre seu time</P12Black>
               <P12Cinza>Atendemos até 06 pokémons por vez</P12Cinza>
             </FlexCol>
-            {[...Array(quantidadePokemons)].map((_, index) => (
-              <FlexR key={`pokemon${index + 1}`}>
-                <P12Black>{`Pokémon 0${index + 1}`}</P12Black>
-                <Select id={`pokemon${index + 1}`} name={`pokemon${index + 1}`}>
-                  <Option value="Bulbasaur">Bulbasaur</Option>
-                  <Option value="Squirtle">Squirtle</Option>
-                  <Option value="Butterfree">Butterfree</Option>
-                  <Option value="Magikarp">Magikarp</Option>
-                  <Option value="Pikachu">Pikachu</Option>
-                  <Option value="Charmander">Charmander</Option>
-                </Select>
-              </FlexR>
-            ))}
+              {[...Array(quantidadePokemons)].map((_, index) => (
+                <PokemonSelect key={`pokemon${index + 1}`} pokemonId={(index + 1).toString()} />
+              ))}
             <ButtonNewPokemon type="button" onClick={adicionarPokemon}>
               <P12Black>
                 {
