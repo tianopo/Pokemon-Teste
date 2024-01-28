@@ -4,34 +4,35 @@ import { StyledImage, StyledLogo, StyledWrite } from "../../../../styles/compone
 
 export const Logo = (): any => {
   const router = useRouter();
-  const [isHomePage, setIsHomePage] = useState(router.pathname === '/');
+  const [isHomePage, setIsHomePage] = useState<boolean>(router.pathname === '/' || true);
+  const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsHomePage(false);
-    }, 5000);
+    if (router.pathname === '/') {
+      const timer = setTimeout(() => setIsHomePage(false), 5000);
 
-    return () => clearTimeout(timer);
+      return () => clearTimeout(timer);
+    }
   }, []);
 
   return (
     <StyledLogo
       style={{
-        width: !isHomePage ? "62px" : "259px",
-        justifyContent: !isHomePage ? "center" : "space-around",
+        width: isHovered || isHomePage ? "259px" : "62px",
+        justifyContent: isHovered || isHomePage ? "space-around" : "center",
         transition: "width 1s ease"
       }}
-      onMouseEnter={() => setIsHomePage(true)}
-      onMouseLeave={() => setIsHomePage(false)}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
       <StyledImage src="/images/white-pokeball.svg" alt='pokebola' />
       <StyledWrite
         style={{
-          opacity: !isHomePage ? 0 : 1,
+          opacity: isHovered || isHomePage ? 1 : 0,
           transition: "opacity 2s ease"
         }}
       >
-        {!isHomePage ? "" : "Centro Pokémon"}
+        {isHomePage || isHovered ? "Centro Pokémon" : ""}
       </StyledWrite>
     </StyledLogo>
   );
