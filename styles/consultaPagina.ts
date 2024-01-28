@@ -7,36 +7,36 @@ export const Div: any = styled(FlexColumn)`
     padding: 32px 0 567px;
   `
 
-  export const P24: any = styled.p`
+export const P24: any = styled.p`
     color: ${colorsX.secundary};
     font-size: 24px;
     font-weight: 600;
     margin: 0 0 43px;
   `
 
-  export const Form: any = styled.form`
+export const Form: any = styled.form`
     width: 548px;
     display: flex;
     flex-direction: column;
     gap: 32px;
   `
 
-  export const FlexCol: any = styled(FlexColumn)`
+export const FlexCol: any = styled(FlexColumn)`
     gap: 8px;
   `
 
-  export const FlexR: any = styled(FlexRow)`
+export const FlexR: any = styled(FlexRow)`
     gap: 18px;
     align-items: center;
   `
 
-  export const Label: any = styled.label`
+export const Label: any = styled.label`
     font-size: 12px;
     font-weight: 700;
     color: ${colorsX.secundary}
   `
 
-  export const Input: any = styled.input`
+export const Input: any = styled.input`
     width: 249px;
     height: 43px;
     flex-shrink: 0;
@@ -51,7 +51,8 @@ export const Div: any = styled(FlexColumn)`
     }
   `
 
-  export const Select: any = styled.select`
+export const Select: any = styled.select`
+    position: relative;
     width: 265px;
     height: 45px;
     flex-shrink: 0;
@@ -61,32 +62,32 @@ export const Div: any = styled(FlexColumn)`
     color: ${colorsX.terciary};
   `;
 
-  export const Option: any = styled.option`
+export const Option: any = styled.option`
     color: ${colorsX.terciary};
     font-size: 14px;
     font-weight: 500;
   `;
 
-  export const FlexTime: any = styled(FlexCol)`
+export const FlexTime: any = styled(FlexCol)`
     margin-top: 77px;
     gap: 32px;
   `
 
-  export const P12Black: any = styled.p`
+export const P12Black: any = styled.p`
     color: ${colorsX.secundary};
     font-size: 12px;
     font-weight: 700;
     margin: 0;
   `
 
-  export const P12Cinza: any = styled.p`
+export const P12Cinza: any = styled.p`
     color: ${colorsX.terciary};
     font-size: 12px;
     font-weight: 500;
     margin: 0;
   `
 
-  export const ButtonNewPokemon: any = styled.button`
+export const ButtonNewPokemon: any = styled.button`
     border-radius: 30px;
     width: 253px;
     height: 42px;
@@ -98,33 +99,33 @@ export const Div: any = styled(FlexColumn)`
     cursor: pointer;
   `
 
-  export const P16Mais: any = styled.p`
+export const P16Mais: any = styled.p`
     font-size: 16px;
     font-weight: 700;
     color: ${colorsX.secundary};
   `
 
-  export const Divider: any = styled.div`
+export const Divider: any = styled.div`
     width: 548px;
     border-top: 1px solid ${colorsX.borda};
   `
 
-  export const FlexRowPaga: any = styled(FlexRow)`
+export const FlexRowPaga: any = styled(FlexRow)`
     justify-content: space-between;
   `
 
-  export const P14Terciary: any = styled.p`
+export const P14Terciary: any = styled.p`
     font-size: 14px;
     font-weight: 400;
     color: ${colorsX.terciary};
     margin: 0;
   `
 
-  export const P8: any = styled(P14Terciary)`
+export const P8: any = styled(P14Terciary)`
     font-size: 8px;
   `
 
-  export const ButtonPaga: any = styled.button`
+export const ButtonPaga: any = styled.button`
     width: 183px;
     height: 42px;
     flex-shrink: 0;

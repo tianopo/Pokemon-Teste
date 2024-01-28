@@ -1,12 +1,16 @@
-import { useState } from "react";
+import axios from 'axios';
+import { useEffect, useState } from "react";
 import { ContainerFlexColumn, ContainerFlexRow, ContainerP12, ContainerP12300, ContainerP14, ContainerP32 } from "../../styles/ContainerRotas";
 import { ButtonNewPokemon, ButtonPaga, Div, Divider, FlexCol, FlexR, FlexRowPaga, FlexTime, Form, Input, Label, Option, P12Black, P12Cinza, P14Terciary, P16Mais, P24, P8, Select } from "../../styles/consultaPagina";
+import { DateResponse } from "../api/scheduling/date";
 
 export default function Consulta() {
   const [quantidadePokemons, setQuantidadePokemons] = useState(1);
   const subtotal = 70.00 * quantidadePokemons;
   const taxa = subtotal * (3 / 100);
   const total = subtotal + taxa
+  const [dates, setDates] = useState<string[]>([]);
+  const [horarios, setHorarios] = useState<string[]>([]);
 
   const adicionarPokemon = () => {
     if (quantidadePokemons < 6) {
@@ -15,6 +19,32 @@ export default function Consulta() {
       setQuantidadePokemons(1)
     }
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get<DateResponse>('/api/scheduling/date');
+        setDates(response.data);
+      } catch (error) {
+        console.error('Erro ao buscar datas:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('/api/scheduling/time');
+        setHorarios(response.data);
+      } catch (error) {
+        console.error('Erro ao buscar datas:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <>
@@ -45,8 +75,8 @@ export default function Consulta() {
               <Label htmlFor="regiao">Região</Label>
               <Select id="regiao" name="regiao">
                 <Option value="Kanto">Kanto</Option>
-                <Option value="Kanto">Johto</Option>
-                <Option value="Kanto">Sinnoh</Option>
+                <Option value="Johto">Johto</Option>
+                <Option value="Sinnoh">Sinnoh</Option>
               </Select>
             </FlexCol>
             <FlexCol>
@@ -67,12 +97,12 @@ export default function Consulta() {
               <FlexR key={`pokemon${index + 1}`}>
                 <P12Black>{`Pokémon 0${index + 1}`}</P12Black>
                 <Select id={`pokemon${index + 1}`} name={`pokemon${index + 1}`}>
-                  <Option value="Kanto">Bulbasaur</Option>
-                  <Option value="Kanto">Squirtle</Option>
-                  <Option value="Kanto">Butterfree</Option>
-                  <Option value="Kanto">Magikarp</Option>
-                  <Option value="Kanto">Pikachu</Option>
-                  <Option value="Kanto">Charmander</Option>
+                  <Option value="Bulbasaur">Bulbasaur</Option>
+                  <Option value="Squirtle">Squirtle</Option>
+                  <Option value="Butterfree">Butterfree</Option>
+                  <Option value="Magikarp">Magikarp</Option>
+                  <Option value="Pikachu">Pikachu</Option>
+                  <Option value="Charmander">Charmander</Option>
                 </Select>
               </FlexR>
             ))}
@@ -80,7 +110,7 @@ export default function Consulta() {
               <P12Black>
                 {
                   quantidadePokemons === 6
-                    ? "Retornar à Pokemon 01"
+                    ? "Retornar à Pokémon 01"
                     : "Adicionar novo pokémon ao time ..."
                 }
               </P12Black>
@@ -90,17 +120,21 @@ export default function Consulta() {
               <FlexCol>
                 <Label htmlFor="dataAtendimento">Data para Atendimento</Label>
                 <Select id="dataAtendimento" name="dataAtendimento">
-                  <Option value="Kanto">Kanto</Option>
-                  <Option value="Kanto">Johto</Option>
-                  <Option value="Kanto">Sinnoh</Option>
+                  {dates.map((date, index) => (
+                    <Option key={index} value={date}>
+                      {date}
+                    </Option>
+                  ))}
                 </Select>
               </FlexCol>
               <FlexCol>
                 <Label htmlFor="horarioAtendimento">Horário de Atendimento</Label>
                 <Select id="horarioAtendimento" name="horarioAtendimento">
-                  <Option value="Pewter City">Pewter City</Option>
-                  <Option value="Pallet Town">Pallet Town</Option>
-                  <Option value="Veridian City">Veridian City</Option>
+                  {horarios.map((horario, index) => (
+                    <Option key={index} value={horario}>
+                      {horario}
+                    </Option>
+                  ))}
                 </Select>
               </FlexCol>
             </FlexR>
