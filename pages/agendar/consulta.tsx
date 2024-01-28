@@ -150,18 +150,24 @@ export default function Consulta() {
               </FlexRowPaga>
               <FlexRowPaga>
                 <P14Terciary>Subtotal:</P14Terciary>
-                <P14Terciary>R$ {subtotal}</P14Terciary>
+                <P14Terciary>
+                  R$ {subtotal.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
+                </P14Terciary>
               </FlexRowPaga>
               <FlexRowPaga>
                 <P14Terciary>Taxa geracional*:</P14Terciary>
-                <P14Terciary>R$ {taxa}</P14Terciary>
+                <P14Terciary>
+                  R$ {taxa.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
+                </P14Terciary>
               </FlexRowPaga>
               <P8>
                 *adicionamos uma taxa de 3%, multiplicado pelo número da geração mais alta do time, com limite de até 30%
               </P8>
             </FlexCol>
             <FlexRowPaga>
-              <P24>Valor Total: R$ {total}</P24>
+              <P24>
+                Valor Total: R$ {total.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
+              </P24>
               <ButtonPaga>Concluir Agendamento</ButtonPaga>
             </FlexRowPaga>
           </FlexTime>
