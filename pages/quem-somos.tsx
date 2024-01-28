@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { ContainerFlexColumn, ContainerFlexRow, ContainerP12, ContainerP12300, ContainerP14, ContainerP32 } from "../styles/ContainerRotas";
 import { colorsX } from "../styles/Cores";
 import { FlexColumn } from "../styles/Flex";
+import { useRouter } from "next/router";
 
 const Div: any = styled(FlexColumn)`
     align-items: center;
@@ -30,12 +31,13 @@ const P14: any = styled(P16)`
   `
 
 export default function QuemSomos() {
+  const router = useRouter()
 
   return (
     <>
       <ContainerFlexColumn>
         <ContainerFlexRow>
-          <ContainerP12>Home</ContainerP12>
+          <ContainerP12 onClick={() => router.push('/')}>Home</ContainerP12>
           <ContainerP12300>{">"}</ContainerP12300>
           <ContainerP12>Quem Somos</ContainerP12>
         </ContainerFlexRow>

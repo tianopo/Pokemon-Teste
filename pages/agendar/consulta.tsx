@@ -6,8 +6,10 @@ import { RegionSelect } from "../../app/components/Select/RegiaoSelect";
 import { ContainerFlexColumn, ContainerFlexRow, ContainerP12, ContainerP12300, ContainerP14, ContainerP32 } from "../../styles/ContainerRotas";
 import { ButtonNewPokemon, ButtonPaga, Div, Divider, FlexCol, FlexR, FlexRowPaga, FlexTime, Form, Input, Label, Option, P12Black, P12Cinza, P14Terciary, P16Mais, P24, P8, Select } from "../../styles/consultaPagina";
 import { DateResponse } from "../api/scheduling/date";
+import { useRouter } from "next/router";
 
 export default function Consulta() {
+  const router = useRouter();
   const [quantidadePokemons, setQuantidadePokemons] = useState(1);
   const subtotal = 70.00 * quantidadePokemons;
   const taxa = subtotal * (3 / 100);
@@ -53,7 +55,7 @@ export default function Consulta() {
     <>
       <ContainerFlexColumn>
         <ContainerFlexRow>
-          <ContainerP12>Home</ContainerP12>
+          <ContainerP12 onClick={() => router.push('/')}>Home</ContainerP12>
           <ContainerP12300>{">"}</ContainerP12300>
           <ContainerP12>Agendar Consulta</ContainerP12>
         </ContainerFlexRow>

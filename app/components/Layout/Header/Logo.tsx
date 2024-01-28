@@ -24,6 +24,7 @@ export const Logo = (): any => {
       }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      onClick={() => router.push('/')}
     >
       <StyledImage src="/images/white-pokeball.svg" alt='pokebola' />
       <StyledWrite
