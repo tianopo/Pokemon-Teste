@@ -132,8 +132,14 @@ export const ButtonPaga: any = styled.button`
     background: ${colorsX.primary};
     border-radius: 30px;
     border-width: 0;
+    cursor: pointer;
 
     color: ${colorsX.white};
     font-size: 14px;
     font-weight: 700;
   `
+
+export const MensagemDeErro: any = styled.span`
+    font-size: 12px;
+    color: red;
+`

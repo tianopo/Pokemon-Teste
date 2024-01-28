@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { UseFormRegister } from "react-hook-form";
 import { Option, Select } from "../../../styles/consultaPagina";
 
 interface IPokemonData {
@@ -7,10 +8,11 @@ interface IPokemonData {
 }
 
 interface IPokemonSelect {
-  pokemonId: string;
+  register: UseFormRegister<any>
+  index: number;
 }
 
-export const PokemonSelect = ({ pokemonId }: IPokemonSelect): any => {
+export const PokemonSelect = ({ register, index }: IPokemonSelect): any => {
   const [pokemonList, setPokemonList] = useState<IPokemonData[]>([]);
 
   useEffect(() => {
@@ -31,7 +33,7 @@ export const PokemonSelect = ({ pokemonId }: IPokemonSelect): any => {
   }, []);
 
   return (
-    <Select id={`pokemon${pokemonId}`} name={`pokemon${pokemonId}`}>
+    <Select id={`pokemon-${index}`} {...register(`timePokemons[${index}].pokemon`)}>
       {pokemonList.map((pokemon, index) => (
         <Option key={index} value={pokemon.name}>{`${pokemon.name}`}</Option>
       ))}

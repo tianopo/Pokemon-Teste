@@ -1,12 +1,17 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { UseFormRegister } from "react-hook-form";
 import { Option, Select } from "../../../styles/consultaPagina";
 
 interface ICityData {
   name: string;
 }
 
-export const CitySelect = (): any => {
+interface ICitySelect {
+  register: UseFormRegister<any>
+}
+
+export const CitySelect = ({ register }: ICitySelect): any => {
   const [cityList, setCityList] = useState<ICityData[]>([]);
 
   useEffect(() => {
@@ -27,7 +32,7 @@ export const CitySelect = (): any => {
   }, []);
 
   return (
-    <Select id={`city`} name={`city`}>
+    <Select id={`cidade`} {...register('cidade')}>
       {cityList.map((city, index) => (
         <Option key={index} value={city.name}>{`${city.name}`}</Option>
       ))}

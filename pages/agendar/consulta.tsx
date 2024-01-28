@@ -7,7 +7,7 @@ import { PokemonSelect } from "../../app/components/Select/PokemonSelect";
 import { RegionSelect } from "../../app/components/Select/RegiaoSelect";
 import { useCriarAgendamento } from "../../app/hooks/useCriarAgendamento";
 import { ContainerFlexColumn, ContainerFlexRow, ContainerP12, ContainerP12300, ContainerP14, ContainerP32 } from "../../styles/ContainerRotas";
-import { ButtonNewPokemon, ButtonPaga, Div, Divider, FlexCol, FlexR, FlexRowPaga, FlexTime, Form, Input, Label, Option, P12Black, P12Cinza, P14Terciary, P16Mais, P24, P8, Select } from "../../styles/consultaPagina";
+import { ButtonNewPokemon, ButtonPaga, Div, Divider, FlexCol, FlexR, FlexRowPaga, FlexTime, Form, Input, Label, MensagemDeErro, Option, P12Black, P12Cinza, P14Terciary, P16Mais, P24, P8, Select } from "../../styles/consultaPagina";
 import { DateResponse } from "../api/scheduling/date";
 
 export default function Consulta() {
@@ -19,7 +19,7 @@ export default function Consulta() {
   const [dates, setDates] = useState<string[]>([]);
   const [horarios, setHorarios] = useState<string[]>([]);
   const { contexto } = useCriarAgendamento();
-  const { formState: { errors }, register, watch, reset, } = contexto;
+  const { formState: { errors, isSubmitSuccessful }, register, watch, reset, handleSubmit, setValue } = contexto;
 
   const adicionarPokemon = () => {
     if (quantidadePokemons < 6) {
@@ -55,6 +55,16 @@ export default function Consulta() {
     fetchData();
   }, []);
 
+  if (!errors) {
+    return <></>;
+  }
+
+  const onSubmit = () => {
+    setValue("total", total);
+    console.log(errors, isSubmitSuccessful, "foi")
+    console.log(watch())
+  }
+
   return (
     <>
       <ContainerFlexColumn>
@@ -69,34 +79,41 @@ export default function Consulta() {
       <Div>
         <P24>Preencha o formulário abaixo para agendar sua consulta</P24>
         <FormProvider {...contexto}>
-          <Form>
+          <Form onSubmit={handleSubmit(onSubmit)}>
             <FlexR>
               <FlexCol>
                 <Label htmlFor="nome">Nome</Label>
-                <Input placeholder="Digite seu nome" id="nome" name="nome" />
+                <Input placeholder="Digite seu nome" id="nome" {...register("nome")} />
+                <MensagemDeErro>{errors.nome?.message}</MensagemDeErro>
               </FlexCol>
               <FlexCol>
                 <Label htmlFor="sobrenome">Sobrenome</Label>
-                <Input placeholder="Digite seu sobrenome" id="sobrenome" name="sobrenome" />
+                <Input placeholder="Digite seu sobrenome" id="sobrenome" {...register("sobrenome")} />
+                <MensagemDeErro>{errors.sobrenome?.message}</MensagemDeErro>
               </FlexCol>
             </FlexR>
             <FlexR>
               <FlexCol>
                 <Label htmlFor="regiao">Região</Label>
-                <RegionSelect />
+                <RegionSelect register={register} />
+                <MensagemDeErro>{errors.regiao?.message}</MensagemDeErro>
               </FlexCol>
               <FlexCol>
                 <Label htmlFor="cidade">Cidade</Label>
-                <CitySelect />
+                <CitySelect register={register} />
+                <MensagemDeErro>{errors.cidade?.message}</MensagemDeErro>
               </FlexCol>
             </FlexR>
             <FlexTime>
               <FlexCol>
-                <P12Black>Cadastre seu time</P12Black>
+                <Label htmlFor="pokemon">Cadastre seu time</Label>
                 <P12Cinza>Atendemos até 06 pokémons por vez</P12Cinza>
               </FlexCol>
               {[...Array(quantidadePokemons)].map((_, index) => (
-                <PokemonSelect key={`pokemon${index + 1}`} pokemonId={(index + 1).toString()} />
+                <>
+                  <PokemonSelect key={`${index + 1}`} register={register} index={index} />
+                  <MensagemDeErro>{errors.timePokemons?.message}</MensagemDeErro>
+                </>
               ))}
               <ButtonNewPokemon type="button" onClick={adicionarPokemon}>
                 <P12Black>
@@ -111,23 +128,25 @@ export default function Consulta() {
               <FlexR>
                 <FlexCol>
                   <Label htmlFor="dataAtendimento">Data para Atendimento</Label>
-                  <Select id="dataAtendimento" name="dataAtendimento">
+                  <Select id="dataAtendimento" {...register("dataAtendimento")}>
                     {dates.map((date, index) => (
                       <Option key={index} value={date}>
                         {date}
                       </Option>
                     ))}
                   </Select>
+                  <MensagemDeErro>{errors.dataAtendimento?.message}</MensagemDeErro>
                 </FlexCol>
                 <FlexCol>
                   <Label htmlFor="horarioAtendimento">Horário de Atendimento</Label>
-                  <Select id="horarioAtendimento" name="horarioAtendimento">
+                  <Select id="horarioAtendimento" {...register("horarioAtendimento")}>
                     {horarios.map((horario, index) => (
                       <Option key={index} value={horario}>
                         {horario}
                       </Option>
                     ))}
                   </Select>
+                  <MensagemDeErro>{errors.horarioAtendimento?.message}</MensagemDeErro>
                 </FlexCol>
               </FlexR>
               <Divider />
